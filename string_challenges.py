@@ -1,7 +1,7 @@
 from collections import *
 # Вывести последнюю букву в слове
 word = 'Архангельск'
-print(word[len(word)-1])
+print(word[-1])
 print()
 
 

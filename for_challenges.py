@@ -68,8 +68,5 @@ groups = [
     ['Оля', 'Петя', 'Гриша'],
     ['Вася', 'Маша', 'Саша', 'Женя'],
 ]
-len_groups = len(groups)
 for i in range (len_groups):
-    len_group = len(groups[i])
-    list_group = list(name for name in groups[i])
-    print(f'Группа {i+1}: {", ".join(list_group)}')
+    print(f'Группа {i+1}: {", ".join(groups[i])}')
