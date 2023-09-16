@@ -7,10 +7,10 @@ print()
 
 # Вывести количество букв "а" в слове
 word = 'Архангельск'
-print((dict(Counter(word).most_common()))['а'])
+# print((dict(Counter(word).most_common()))['а'])
 
-list_word = list(word)
-print(list_word.count('а'))
+# list_word = list(word)
+print(word.count('а'))
 print()
 
 

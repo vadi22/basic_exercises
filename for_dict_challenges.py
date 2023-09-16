@@ -58,7 +58,7 @@ school_students = [
 ]
 for i in range (len(school_students)):
     list_name = [st['first_name'] for st in school_students[i]]
-    print(f'Самое частое имя среди учеников: {Counter(list_name).most_common(1)[0][0]}')
+    print(f'Самое частое имя среди учеников в классе {i+1}: {Counter(list_name).most_common(1)[0][0]}')
 print()
 
 
@@ -98,6 +98,7 @@ print()
 # Больше всего девочек в классе 2a
 
 school = [
+    {'class': '4в', 'students': [{'first_name': 'Олег'}, {'first_name': 'Олег'} , {'first_name': 'Маша'}, ]},
     {'class': '2a', 'students': [{'first_name': 'Маша'}, {'first_name': 'Оля'}]},
     {'class': '3c', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}]},
 ]
@@ -116,8 +117,10 @@ for class_num in school:
     girls, boys = gender_students.count(False), gender_students.count(True)
     if girls > max_girls:
         class_girls = class_num['class']
+        max_girls = girls
     if boys > max_boys:
         class_boys = class_num['class']
+        max_boys = boys
 print(f'Больше всего девочек в классе {class_girls}')
 print(f'Больше всего мальчиков в классе {class_boys}')
 print()
