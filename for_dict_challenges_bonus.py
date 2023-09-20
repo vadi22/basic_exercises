@@ -35,7 +35,7 @@ import uuid
 import datetime
 
 import lorem
-
+from collections import Counter
 
 def generate_chat_history():
     messages_amount = random.randint(200, 1000)
@@ -66,5 +66,70 @@ def generate_chat_history():
     return messages
 
 
+def user_max_messager(messages):
+    list_user = [dict_mess['sent_by'] for dict_mess in messages]
+    user_max = Counter(list_user).most_common(1)
+    print(f'айди пользователя, который написал больше всех сообщений {user_max[0][0]}')
+
+
+def user_max_response(messages):
+    list_response = [dict_response['reply_for'] for dict_response in messages if dict_response['reply_for']]
+    response_max = Counter(list_response).most_common(1)
+    for mess in messages:
+        if mess["id"] == response_max[0][0]:
+            print(f'айди пользователя, на сообщения которого больше всего отвечали {mess["sent_by"]}')
+
+
+def users_max_viewed(messages):
+    viewed_max = 0
+    for message in messages:
+        len_set = len(set(message['seen_by']))
+        if len_set > viewed_max:
+            id_user_viewed = message['sent_by']
+            viewed_max = len_set
+    print(f'айди пользователей, сообщения которых видело больше всего уникальных пользователей {id_user_viewed}')
+
+
+def more_messages(messages):
+    morning = 0
+    afternoon = 0
+    evening = 0
+    for message in messages:
+        hour = float(message["sent_at"].strftime('%H'))
+        if hour >= 18:
+            evening += 1
+        elif hour >=12:
+            afternoon += 1
+        else:
+            morning += 1
+    max_time_interval = max([evening, afternoon, morning])
+    if max_time_interval == morning:
+        print('в чате больше всего сообщений: утром (до 12 часов)')
+    elif max_time_interval == afternoon:
+        print('в чате больше всего сообщений: днём (12-18 часов)')
+    else:
+        print('в чате больше всего сообщений: вечером (после 18 часов)')
+
+
+
+def max_thread(messages):
+    list_treads = [message['reply_for'] for message in messages if message['reply_for']]
+    thread= Counter(list_treads).most_common(3)
+    print(f'идентификаторы сообщений, который стали началом для самых длинных тредов {thread[0][0]}, {thread[1][0]}, {thread[2][0]}')
+
+
+            
+        
+ 
+
+
+
+
+
 if __name__ == "__main__":
-    print(generate_chat_history())
+    messages = generate_chat_history()
+    user_max_messager(messages)
+    user_max_response(messages)
+    users_max_viewed(messages)
+    more_messages(messages)
+    max_thread(messages)
